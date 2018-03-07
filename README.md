@@ -1,0 +1,2 @@
+# weos
+Eos web wallet

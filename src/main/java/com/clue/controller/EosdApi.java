@@ -6,7 +6,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface EosdApi {
-
     @GET("/v1/chain/{infoType}")
     Call<EosChainInfo> readInfo(@Path("infoType") String infoType);
 }

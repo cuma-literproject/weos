@@ -6,12 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-/**
- * represents the result of a SHA256 hashing operation prefer to use the static
- * factory methods.
- */
 public class Sha256 {
-
     public static final int HASH_LENGTH = 32;
     public static final Sha256 ZERO_HASH = new Sha256(new byte[HASH_LENGTH]);
 
@@ -24,9 +19,9 @@ public class Sha256 {
 
     private static MessageDigest getSha256Digest() {
         try {
-            return MessageDigest.getInstance( "SHA-256" );
+            return MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e); //cannot happen
+            throw new RuntimeException(e);
         }
     }
 

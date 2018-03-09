@@ -24,7 +24,7 @@ public class Sha512 implements Comparable<Sha512> {
         try {
             digest = MessageDigest.getInstance("SHA-512");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e); //cannot happen
+            throw new RuntimeException(e);
         }
 
         digest.update(data, 0, data.length);
@@ -33,7 +33,6 @@ public class Sha512 implements Comparable<Sha512> {
 
 
     private Sha512(byte[] bytes, int offset) {
-        //defensive copy, since incoming bytes is of arbitrary length
         mHashBytes = new byte[HASH_LENGTH];
         System.arraycopy(bytes, offset, mHashBytes, 0, HASH_LENGTH);
     }

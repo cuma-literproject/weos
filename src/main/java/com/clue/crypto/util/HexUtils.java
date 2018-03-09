@@ -1,4 +1,4 @@
-package com.clue.crypto.digest;
+package com.clue.crypto.util;
 
 public class HexUtils {
     public static String toHex(byte[] bytes) {

@@ -1,5 +1,6 @@
 package com.clue.crypto.digest;
 
+import com.clue.crypto.util.HexUtils;
 import com.google.common.base.Preconditions;
 
 import java.security.MessageDigest;

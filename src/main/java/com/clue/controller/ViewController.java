@@ -14,6 +14,6 @@ public class ViewController {
 
     @RequestMapping("/{server}/wallet")
     String wallet(@PathVariable String server, Model model) {
-        return "wallet";
+        return "home";
     }
 }

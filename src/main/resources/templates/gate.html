@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Floating labels example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/gate.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="signin">
+    <form class="form-signin" onsubmit="return false">
+        <div class="text-center mb-4">
+            <img class="mb-4" src="/images/eos.png" alt="" width="136" height="200">
+            <h1 class="h3 mb-3 font-weight-normal">WEOS</h1>
+            <p>This is <a href="https://www.myetherwallet.com">MyEtherWallet</a> replica project for eos.</p>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="server">Server</label>
+            </div>
+            <select class="custom-select" id="server">
+                <option value="testnet1" selected>Testnet1</option>
+                <option value="testnet2">Testnet2</option>
+                <option value="localnet">Localnet</option>
+            </select>
+        </div>
+
+        <div class="form-submit">
+          <button id="connect" class="btn btn-lg btn-primary btn-block">Connect</button>
+        </div>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; CLUE STUDIO</p>
+    </form>
+</div>
+
+<script src="/thirdparty/jquery/jquery-3.3.1.min.js"></script>
+<script src="/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/gate.js"></script>
+
+</body>
+</html>

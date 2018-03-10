@@ -21,51 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.clue.remote;
+package com.clue.remote.types;
 
-import java.util.Collection;
+
+import com.clue.crypto.util.HexUtils;
 
 /**
  * Created by swapnibble on 2017-09-12.
  */
 
-public interface EosType {
-    class InsufficientBytesException extends Exception {
+public class TypeKeyPermissionWeight implements EosType.Packer {
+    byte[] mPubKey;
+    short mWeight = 0;
 
-        private static final long serialVersionUID = 1L;
+    TypeKeyPermissionWeight(byte[] pubKey, short weight) {
+        mPubKey = pubKey;
+        mWeight = weight;
     }
 
-    interface Packer {
-        void pack(Writer writer);
+
+    TypeKeyPermissionWeight(String pubKeyInHex, int weight) {
+        this(HexUtils.toBytes(pubKeyInHex), (short)weight);
     }
 
-    interface Unpacker {
-        void unpack(Reader reader) throws InsufficientBytesException;
-    }
 
-    interface Reader {
-        byte get() throws InsufficientBytesException;
-        int getShortLE() throws InsufficientBytesException;
-        int getIntLE() throws InsufficientBytesException;
-        long getLongLE() throws InsufficientBytesException;
-        byte[] getBytes(int size) throws InsufficientBytesException;
-        String getString() throws InsufficientBytesException;
+    @Override
+    public void pack(EosType.Writer writer) {
 
-        long getVariableUint() throws InsufficientBytesException;
-    }
+        if ( null != mPubKey ) {
+            writer.putBytes(mPubKey);
+        }
 
-    interface Writer {
-        void put(byte b);
-        void putShortLE(short value);
-        void putIntLE(int value);
-        void putLongLE(long value);
-        void putBytes(byte[] value);
-        void putString(String value);
-        byte[] toBytes();
-        int length();
-
-        void putCollection(Collection<? extends Packer> collection);
-
-        void putVariableUInt(long val);
+        writer.putShortLE( mWeight);
     }
 }

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.clue.remote;
+package com.clue.remote.types;
 
 public class EosByteReader implements EosType.Reader{
 

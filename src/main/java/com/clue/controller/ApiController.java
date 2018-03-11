@@ -1,8 +1,10 @@
 package com.clue.controller;
 
+import com.clue.crypto.ec.EosPrivateKey;
 import com.clue.model.EosChainInfo;
 import com.clue.util.RetrofitClient;
 import com.google.gson.Gson;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -23,6 +25,12 @@ public class ApiController {
         } catch (IOException e) {
             return "something goes wrong:" + e.getMessage();
         }
+    }
+
+    @RequestMapping("/key/k1")
+    String key(Model model) {
+        EosPrivateKey key = new EosPrivateKey();
+        return key.toString();
     }
 
     String decodeUTF8(byte[] bytes) {

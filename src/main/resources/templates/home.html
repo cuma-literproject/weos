@@ -27,10 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">New Wallet</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Account</a>
+          <a class="nav-link" href="#">New Account</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Transfer</a>
@@ -42,7 +39,7 @@
           <a class="nav-link" href="#">Table</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">My Wallet</a>
+          <a class="nav-link" href="#">My Account</a>
         </li>
       </ul>
     </div>
@@ -51,9 +48,17 @@
 
 <!-- Begin page content -->
 <main role="main" class="container">
-  <h1 class="mt-5">Create New Wallet</h1>
-  <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body &gt; .container</code>.</p>
-  <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+  <h1 class="mt-5">Create New Account</h1>
+  <p class="lead">Create EOS account on the block chain.</p>
+  <h2 class="mt-5">Generate private keys</h2>
+  You need to generate two private key for account.
+
+  <div id="app">
+    {{ key1 }}
+    <br/>
+    {{ key2 }}
+  </div>
+
 </main>
 
 <footer class="footer">
@@ -67,7 +72,9 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="/thirdparty/jquery/jquery-3.3.1.min.js"></script>
 <script src="/thirdparty/bootstrap/js/bootstrap.min.js"></script>
-<script src="/js/gate.js"></script>
+<script src="/thirdparty/axios/axios.min.js"></script>
+<script src="/thirdparty/vue/vue.js"></script>
+<script src="/js/new.account.js"></script>
 
 
 </body>

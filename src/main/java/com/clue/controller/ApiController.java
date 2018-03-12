@@ -11,11 +11,17 @@ import com.clue.remote.types.TypeChainId;
 import com.clue.util.Consts;
 import com.clue.util.RetrofitClient;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -29,7 +35,7 @@ public class ApiController {
     @RequestMapping("/v1/info")
     String home() {
         try {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setLenient().create();
             EosChainInfo res = getChainInfo().execute().body();
             return gson.toJson(res);
         } catch (IOException e) {
@@ -70,7 +76,23 @@ public class ApiController {
 
 
 
-        Retrofit retrofit = RetrofitClient.getClient("http://testnet1.eos.io");
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);
+
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://testnet1.eos.io")
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
         EosdApi eosdApi = retrofit.create(EosdApi.class);
         Response<RequiredKeysResponse> response = eosdApi.getRequiredKeys(new GetRequiredKeys(txn, keys)).execute();
     //    if (response.body() == null) {

@@ -1,31 +1,66 @@
 <html layout:decorate="~{layout.html}">
 <head>
-  <link href="/css/account.css" rel="stylesheet">
+    <link href="/css/account.css" rel="stylesheet">
+    <title>New Account</title>
 </head>
 
 <body>
 
 <section layout:fragment="content">
-<!-- Begin page content -->
-<main role="main" class="container">
-  <h1 class="mt-5">Create New Account</h1>
-  <p class="lead">Create EOS account on the block chain.</p>
-  <h2 class="mt-5">Generate private keys</h2>
-  You need to generate two private key for account.
+    <!-- Begin page content -->
+    <main role="main" class="container">
+        <h1 class="mt-5">Create New Account</h1>
+        <p class="lead">Create EOS account on the block chain.</p>
 
-  <div id="app">
-    {{ key1 }}
-    <br/>
-    {{ key2 }}
-  </div>
+        <section>
+            <h2 class="mt-5">Generate private keys (1/2)</h2>
+            <p>
+                Save Your Private Key.<br/>
+            </p>
+            <dl>
+                <dt>Do not lose it!</dt>
+                <dd>It cannot be recovered if you lose it.</dd>
+                <dt>Do not share it!</dt>
+                <dd>Your funds will be stolen if you use this file on a malicious/phishing site.</dd>
+                <dt>Make a backup!</dt>
+                <dd>Secure it like the millions of dollars it may one day be worth.</dd>
+            </dl>
 
-</main>
+            <div class="alert alert-success" role="alert" id="app">
+                <h5 class="alert-heading">Active</h5>
+                <p class="mb-0" id="key_active">{{ key1 }}</p>
+                <hr>
+                <h5 class="alert-heading">Owner</h5>
+                <p class="mb-0" id="key_owner">{{ key2 }}</p>
+            </div>
+
+            <div>
+                <button id="save_key" type="button" class="btn btn-primary btn-lg">Save</button>
+                <button id="next_key" type="button" class="btn btn-secondary btn-lg disabled">Next</button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="mt-5">Register new account (2/2)</h2>
+            <p>
+                Register your account on the EOS block chain.<br/>
+            </p>
+            <div class="input-group mb-3">
+                <input id="account_name" type="text" class="form-control" placeholder="Account Name"/>
+            </div>
+
+            <div>
+                <button id="new_account" type="button" class="btn btn-primary btn-lg">Register</button>
+            </div>
+        </section>
+
+    </main>
 </section>
 
 <footer>
-  <p layout:fragment="custom-footer">
-    <script src="/js/new.account.js"></script>
-  </p>
+    <p layout:fragment="custom-footer">
+        <script src="/js/new.account.js"></script>
+    </p>
 </footer>
 
 </body>

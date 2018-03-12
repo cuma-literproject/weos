@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class EosChainInfo {
     @SerializedName("server_version")
     @Expose
@@ -53,4 +59,22 @@ public class EosChainInfo {
     @Getter
     @Setter
     private String participationRate;
+
+    public String getTimeAfterHeadBlockTime(int diffInMilSec) {
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            Date date = sdf.parse( this.headBlockTime);
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add( Calendar.MILLISECOND, diffInMilSec);
+            date = c.getTime();
+
+            return sdf.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return this.headBlockTime;
+        }
+    }
 }

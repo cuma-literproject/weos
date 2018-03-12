@@ -1,5 +1,7 @@
 package com.clue.controller;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +14,13 @@ public class ViewController {
         return "gate";
     }
 
-    @RequestMapping("/{server}/wallet")
+    @RequestMapping("/{server}/account")
     String wallet(@PathVariable String server, Model model) {
-        return "home";
+        return "account";
+    }
+
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
     }
 }

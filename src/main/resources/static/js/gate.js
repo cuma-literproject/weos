@@ -1,4 +1,4 @@
 $('#connect').click(function(){
-    location.href = '/' + $('#server option:selected').val() + '/wallet';
+    location.href = '/' + $('#server option:selected').val() + '/account';
 });
 

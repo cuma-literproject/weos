@@ -1,0 +1,32 @@
+<html layout:decorate="~{layout.html}">
+<head>
+  <link href="/css/account.css" rel="stylesheet">
+</head>
+
+<body>
+
+<section layout:fragment="content">
+<!-- Begin page content -->
+<main role="main" class="container">
+  <h1 class="mt-5">Create New Account</h1>
+  <p class="lead">Create EOS account on the block chain.</p>
+  <h2 class="mt-5">Generate private keys</h2>
+  You need to generate two private key for account.
+
+  <div id="app">
+    {{ key1 }}
+    <br/>
+    {{ key2 }}
+  </div>
+
+</main>
+</section>
+
+<footer>
+  <p layout:fragment="custom-footer">
+    <script src="/js/new.account.js"></script>
+  </p>
+</footer>
+
+</body>
+</html>

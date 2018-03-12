@@ -11,6 +11,8 @@ import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ApiController {
@@ -27,10 +29,18 @@ public class ApiController {
         }
     }
 
-    @RequestMapping("/key/k1")
-    String key(Model model) {
-        EosPrivateKey key = new EosPrivateKey();
-        return key.toString();
+    @RequestMapping("/key/k1/{count}")
+    List<String> key(@PathVariable int count, Model model) {
+        List<String> result = new ArrayList<>();
+        if (count > 10) {
+            return result;
+        }
+
+        for (int i = 0; i < count; i++) {
+            EosPrivateKey key = new EosPrivateKey();
+            result.add(key.toString());
+        }
+        return result;
     }
 
     String decodeUTF8(byte[] bytes) {

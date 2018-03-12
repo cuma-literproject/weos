@@ -9,8 +9,9 @@ var app = new Vue({
     },
     methods: {
         getKey() {
-            axios.get('/key/k1').then(response => {
-                this.key1 = response.data;
+            axios.get('/key/k1/2').then(response => {
+                this.key1 = response.data[0];
+                this.key2 = response.data[1];
             });
         }
     }

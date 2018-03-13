@@ -3,6 +3,7 @@ package com.clue.controller;
 import com.clue.crypto.ec.EosPrivateKey;
 import com.clue.model.EosChainInfo;
 import com.clue.remote.api.Message;
+import com.clue.remote.api.PushTxnResponse;
 import com.clue.remote.chain.GetRequiredKeys;
 import com.clue.remote.chain.RequiredKeysResponse;
 import com.clue.remote.chain.SignedTransaction;
@@ -68,6 +69,10 @@ public class ApiController {
         keys.add(realOwnerKey.getPublicKey().getBytesAsHexStr());
         keys.add(realActiveKey.getPublicKey().getBytesAsHexStr());
 
+        ArrayList<String> keys2 = new ArrayList<>();
+        keys2.add(realOwnerKey.getPublicKey().toString());
+        keys2.add(realActiveKey.getPublicKey().toString());
+
         EosNewAccount newAccountData = new EosNewAccount(creator, name, keys.get(0), keys.get(1), creator);
 
         SignedTransaction txn = createTransaction(Consts.EOS_CONTRACT_NAME, newAccountData.getTypeName(), newAccountData.getAsHex()
@@ -88,25 +93,26 @@ public class ApiController {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://testnet1.eos.io")
+                .baseUrl("http://localhost:8888")
                 .client(httpClient.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         EosdApi eosdApi = retrofit.create(EosdApi.class);
-        Response<RequiredKeysResponse> response = eosdApi.getRequiredKeys(new GetRequiredKeys(txn, keys)).execute();
-    //    if (response.body() == null) {
-        //response.raw();
-            return response.raw().toString();
-  //      }
+        Response<RequiredKeysResponse> response = eosdApi.getRequiredKeys(new GetRequiredKeys(txn, keys2)).execute();
 
-//        return response.keys.toString();
+        // no-key return
+        // signTransaction(txn);
 
-//        signTransaction(txn);
+        EosdApi eosdApi2 = retrofit.create(EosdApi.class);
+        Response<PushTxnResponse> response2 = eosdApi2.pushTransaction(txn).execute();
 
-//        Retrofit retrofit = RetrofitClient.getClient("http://testnet1.eos.io");
 
-//        return "done!";
+        String res = gson.toJson(response2.body()).toString();
+        System.out.println(res);
+
+
+        return res;
     }
 
     String decodeUTF8(byte[] bytes) {
@@ -114,7 +120,7 @@ public class ApiController {
     }
 
     public Call<EosChainInfo> getChainInfo() {
-        Retrofit retrofit = RetrofitClient.getClient("http://testnet1.eos.io");
+        Retrofit retrofit = RetrofitClient.getClient("http://localhost:8888");
 
         EosdApi eosdApi = retrofit.create(EosdApi.class);
         return eosdApi.readInfo("get_info");
